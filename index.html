@@ -484,6 +484,131 @@
     .marquee-row { animation: none; }
     .hero-video-wrap video { display: none; }
   }
+
+  /* ===== Landing page: sharp edges + cohesive imagery ===== */
+  /* Strip all border-radius across the landing view */
+  #landing-view *,
+  #landing-view *::before,
+  #landing-view *::after {
+    border-radius: 0 !important;
+  }
+  /* Keep ONLY explicitly opted-in things round */
+  #landing-view .keep-round { border-radius: 999px !important; }
+
+  /* Unified duotone tint for all landing imagery */
+  #landing-view img.tint-img,
+  #landing-view .tint-img img {
+    filter: grayscale(0.9) sepia(0.35) hue-rotate(135deg) saturate(1.6) brightness(0.92) contrast(1.05);
+    transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #landing-view .tint-img:hover img,
+  #landing-view img.tint-img:hover {
+    filter: grayscale(0.4) sepia(0.15) hue-rotate(135deg) saturate(1.3) brightness(1) contrast(1.05);
+  }
+
+  /* Comparison table */
+  #landing-view .compare {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid var(--stone);
+  }
+  #landing-view .compare th,
+  #landing-view .compare td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--stone);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  #landing-view .compare th {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--sand);
+  }
+  #landing-view .compare th.col-hygea {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  #landing-view .compare td.col-hygea {
+    background: rgba(13, 74, 68, 0.06);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  #landing-view .compare td.col-old {
+    color: var(--mute);
+    text-decoration: line-through;
+  }
+  #landing-view .compare tr:last-child td { border-bottom: none; }
+
+  /* Demo calendar */
+  #landing-view .demo-cal {
+    background: white;
+    border: 1px solid var(--stone);
+  }
+  #landing-view .demo-cal-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--stone);
+  }
+  #landing-view .demo-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--stone);
+    border-top: 1px solid var(--stone);
+  }
+  #landing-view .demo-cal-grid .dow {
+    background: var(--sand);
+    padding: 10px;
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mute);
+    font-weight: 600;
+  }
+  #landing-view .demo-cal-grid .day {
+    background: white;
+    min-height: 96px;
+    padding: 10px;
+    display: flex; flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  #landing-view .demo-cal-grid .day.outside { background: var(--cream); color: var(--stone); }
+  #landing-view .demo-cal-grid .day.today { background: rgba(232, 116, 106, 0.08); }
+  #landing-view .demo-cal-grid .day.today .day-num {
+    background: var(--coral); color: white;
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  #landing-view .demo-cal-grid .day-num {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  #landing-view .demo-cal-grid .shift-pill {
+    font-size: 10px;
+    padding: 3px 6px;
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 600;
+    line-height: 1.2;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 4px;
+  }
+  #landing-view .demo-cal-grid .shift-pill.filled { background: var(--jade); }
+  #landing-view .demo-cal-grid .shift-pill.open   { background: var(--coral); }
+  #landing-view .demo-cal-grid .shift-pill.pending{ background: var(--honey); }
+
+  @media (max-width: 768px) {
+    #landing-view .demo-cal-grid .day { min-height: 64px; padding: 6px; }
+    #landing-view .demo-cal-grid .shift-pill { font-size: 9px; padding: 2px 4px; }
+  }
 </style>
 </head>
 <body>
@@ -647,11 +772,17 @@
       <span class="font-display text-2xl font-semibold tracking-tight">Hygea</span>
     </div>
 
-    <button onclick="toggleMobileMenu()" class="md:hidden p-2" aria-label="menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </button>
+    <div class="md:hidden flex items-center gap-2">
+      <button onclick="showLogin()" class="px-3 py-1.5 rounded-full text-sm border border-ink/20 hover:bg-ink hover:text-cream transition flex items-center gap-1.5">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Log in
+      </button>
+      <button onclick="toggleMobileMenu()" class="p-2" aria-label="menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
 
     <div class="hidden md:flex items-center gap-8 text-sm">
       <a class="hover:text-jade transition cursor-pointer">For hygienists</a>
@@ -822,27 +953,27 @@
     </div>
   </section>
 
-  <!-- Image marquee strip -->
-  <section class="py-6 bg-cream border-b border-stone">
+  <!-- Image marquee strip — squared + duotone -->
+  <section class="py-0 bg-ink border-y border-jade/20">
     <div class="marquee-mask">
       <div class="marquee-row">
-        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
         <!-- duplicate for seamless loop -->
-        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
-        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
+        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-44 w-44 object-cover tint-img"/>
       </div>
     </div>
   </section>
@@ -935,38 +1066,169 @@
     </div>
   </section>
 
-  <!-- Inside the network gallery -->
-  <section class="px-4 md:px-10 py-20 bg-cream relative overflow-hidden">
+  <!-- Why Hygea — sales section -->
+  <section class="px-4 md:px-10 py-24 bg-cream relative overflow-hidden">
     <div class="max-w-6xl mx-auto relative">
-      <div class="text-center mb-12 reveal">
-        <div class="text-xs uppercase tracking-widest text-jade mb-3">Inside the network</div>
-        <h2 class="font-display text-4xl md:text-5xl font-semibold mb-4">Modern clinics. Trusted hands.</h2>
-        <p class="text-lg text-ink/70 max-w-2xl mx-auto">A look at the practices and professionals on Hygea today.</p>
+      <div class="grid md:grid-cols-12 gap-10 mb-16 items-end">
+        <div class="md:col-span-7 reveal">
+          <div class="text-xs uppercase tracking-widest text-jade mb-4">Why Hygea</div>
+          <h2 class="font-display text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight">
+            Stop bleeding revenue<br>
+            on <span class="italic text-jade">empty chairs.</span>
+          </h2>
+        </div>
+        <div class="md:col-span-5 reveal">
+          <p class="text-lg text-ink/75 leading-relaxed">
+            A single unfilled hygiene shift costs the average GTA practice <strong class="text-ink">$840 in lost production</strong>. Hygea fills it in 47 minutes — with a verified, insured RDH — for a fraction of what an agency charges. No contracts. Pay only after the shift.
+          </p>
+        </div>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="parallax-tile reveal reveal-zoom h-72 col-span-2 row-span-2">
-          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=900&q=70&auto=format&fit=crop" alt="Modern dental clinic" class="w-full h-full object-cover"/>
-          <div class="tile-caption">
-            <div class="font-display text-lg font-semibold">119 active practices</div>
-            <div class="opacity-80">Across the GTA</div>
+      <!-- The deal in numbers -->
+      <div class="grid grid-cols-1 md:grid-cols-3 border border-stone bg-white mb-20">
+        <div class="p-8 border-b md:border-b-0 md:border-r border-stone reveal">
+          <div class="text-xs uppercase tracking-widest text-jade font-medium mb-3">Time saved</div>
+          <div class="font-display text-6xl font-semibold tracking-tight">47<span class="text-3xl text-mute"> min</span></div>
+          <div class="text-sm text-mute mt-3 leading-relaxed">Average shift fill time, vs. 3–7 days for a traditional staffing agency.</div>
+        </div>
+        <div class="p-8 border-b md:border-b-0 md:border-r border-stone reveal">
+          <div class="text-xs uppercase tracking-widest text-jade font-medium mb-3">Money saved</div>
+          <div class="font-display text-6xl font-semibold tracking-tight">$3,200</div>
+          <div class="text-sm text-mute mt-3 leading-relaxed">Avg. monthly savings vs. traditional agencies for a 4-op practice.</div>
+        </div>
+        <div class="p-8 reveal">
+          <div class="text-xs uppercase tracking-widest text-jade font-medium mb-3">Production protected</div>
+          <div class="font-display text-6xl font-semibold tracking-tight">+18%</div>
+          <div class="text-sm text-mute mt-3 leading-relaxed">More billable hygiene hours per quarter, on average, after switching.</div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="reveal mb-20">
+        <div class="text-xs uppercase tracking-widest text-jade font-medium mb-4">The difference</div>
+        <h3 class="font-display text-3xl md:text-4xl font-semibold mb-8">Hygea vs. the old way</h3>
+
+        <div class="overflow-x-auto">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Calling temp agencies</th>
+                <th class="col-hygea">Hygea</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-medium">Time to fill an open shift</td>
+                <td class="col-old">3–7 days</td>
+                <td class="col-hygea">47 minutes (avg)</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Hourly markup</td>
+                <td class="col-old">35–60%</td>
+                <td class="col-hygea">Flat 12% platform fee</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Liability insurance</td>
+                <td class="col-old">Practice carries it</td>
+                <td class="col-hygea">$2M included on every shift</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Credential verification</td>
+                <td class="col-old">You verify, you risk</td>
+                <td class="col-hygea">Background + license check, every RDH</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Cancellation guarantee</td>
+                <td class="col-old">None — you eat the cost</td>
+                <td class="col-hygea">Free replacement within 2 hours</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Contracts &amp; minimums</td>
+                <td class="col-old">12-month commitments</td>
+                <td class="col-hygea">None. Pay per shift, only after it's filled</td>
+              </tr>
+              <tr>
+                <td class="font-medium">After-hours support</td>
+                <td class="col-old">Voicemail until Monday</td>
+                <td class="col-hygea">24/7 live ops team</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Six benefit cards -->
+      <div class="reveal mb-12">
+        <div class="text-xs uppercase tracking-widest text-jade font-medium mb-4">What you get</div>
+        <h3 class="font-display text-3xl md:text-4xl font-semibold mb-8">Built for the way modern practices actually work</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone border border-stone">
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
+          <div class="font-display text-xl font-semibold mb-2">Same-day coverage</div>
+          <p class="text-sm text-mute leading-relaxed">A hygienist calls in sick at 7 AM. By 7:47, you have a verified replacement walking through the door — already credentialed for your software.</p>
         </div>
-        <div class="parallax-tile reveal h-72">
-          <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=70&auto=format&fit=crop" alt="Hygienist at work" class="w-full h-full object-cover"/>
-          <div class="tile-caption"><div class="font-display font-semibold">Verified RDHs</div></div>
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="font-display text-xl font-semibold mb-2">No agency markup</div>
+          <p class="text-sm text-mute leading-relaxed">Pay the hygienist's actual rate, plus a flat 12% platform fee. No premiums, no per-diem fees, no surprise invoices at month-end.</p>
         </div>
-        <div class="parallax-tile reveal h-72">
-          <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=600&q=70&auto=format&fit=crop" alt="Smile" class="w-full h-full object-cover"/>
-          <div class="tile-caption"><div class="font-display font-semibold">4.8★ avg rating</div></div>
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="font-display text-xl font-semibold mb-2">$2M insurance, every shift</div>
+          <p class="text-sm text-mute leading-relaxed">Every booking is covered by our $2M professional liability policy. You don't carry the risk — we do.</p>
         </div>
-        <div class="parallax-tile reveal h-72">
-          <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=70&auto=format&fit=crop" alt="Dentist tools" class="w-full h-full object-cover"/>
-          <div class="tile-caption"><div class="font-display font-semibold">Same-day shifts</div></div>
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="font-display text-xl font-semibold mb-2">Verified, every time</div>
+          <p class="text-sm text-mute leading-relaxed">License check, criminal background, reference review, and a working interview. 14% of applicants make it through.</p>
         </div>
-        <div class="parallax-tile reveal h-72">
-          <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=600&q=70&auto=format&fit=crop" alt="Dental checkup" class="w-full h-full object-cover"/>
-          <div class="tile-caption"><div class="font-display font-semibold">$2M insurance</div></div>
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="font-display text-xl font-semibold mb-2">Recurring shifts on autopilot</div>
+          <p class="text-sm text-mute leading-relaxed">Need Tuesday + Thursday coverage every week? Set it once. The same vetted hygienist shows up automatically — or we send a backup if she can't.</p>
+        </div>
+        <div class="bg-white p-8 reveal">
+          <div class="w-10 h-10 bg-jade text-cream flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="font-display text-xl font-semibold mb-2">No contracts, no minimums</div>
+          <p class="text-sm text-mute leading-relaxed">Use Hygea twice a year or twice a week — same terms either way. Pay only after the shift is completed and signed off.</p>
+        </div>
+      </div>
+
+      <!-- Sales CTA bar -->
+      <div class="mt-16 bg-ink text-cream p-10 md:p-14 grid md:grid-cols-12 gap-8 items-center reveal">
+        <div class="md:col-span-7">
+          <div class="text-xs uppercase tracking-widest text-coral font-medium mb-3">Estimated savings</div>
+          <h3 class="font-display text-3xl md:text-4xl font-semibold leading-tight">
+            A 4-op GTA practice saves <span class="text-coral">$38,400/yr</span> switching to Hygea.
+          </h3>
+          <p class="text-cream/70 mt-4 max-w-lg">Based on 8 unfilled hygiene days per month at $840 in lost production, plus $1,200/mo eliminated agency markup.</p>
+        </div>
+        <div class="md:col-span-5 flex flex-col gap-3">
+          <button onclick="showSignup(); document.getElementById('signupType').value='office';"
+                  class="w-full px-6 py-4 bg-coral text-white font-semibold hover:bg-rust transition btn-press flex items-center justify-center gap-2">
+            Start saving — post a shift
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="showDemo()"
+                  class="w-full px-6 py-4 border border-cream/30 text-cream font-medium hover:bg-white/10 transition btn-press">
+            Get a 1:1 walkthrough
+          </button>
+          <div class="text-xs text-cream/60 text-center pt-2">No credit card. No contract. Cancel any time.</div>
         </div>
       </div>
     </div>
@@ -1038,6 +1300,176 @@
               <div class="text-sm font-medium">Sarah Chen</div>
               <div class="text-xs text-mute">RDH · Mississauga</div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo calendar — fake but real-looking -->
+  <section class="px-4 md:px-10 py-24 bg-sand">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-10 mb-12 items-end">
+        <div class="md:col-span-7 reveal">
+          <div class="text-xs uppercase tracking-widest text-jade mb-4">A look inside</div>
+          <h2 class="font-display text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight">
+            Every shift, on one screen.
+          </h2>
+        </div>
+        <div class="md:col-span-5 reveal">
+          <p class="text-lg text-ink/75 leading-relaxed">
+            See open, filled, and pending shifts at a glance. Tap a day to post coverage, swap a hygienist, or review applicants — without leaving the calendar.
+          </p>
+        </div>
+      </div>
+
+      <div class="demo-cal reveal">
+        <div class="demo-cal-head flex-wrap gap-4">
+          <div class="flex items-center gap-3">
+            <button class="w-9 h-9 border border-stone hover:bg-sand text-ink flex items-center justify-center" aria-label="prev">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="w-9 h-9 border border-stone hover:bg-sand text-ink flex items-center justify-center" aria-label="next">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <h3 class="font-display text-2xl font-semibold ml-2">May 2026</h3>
+            <button class="ml-3 px-3 py-1.5 border border-stone text-xs hover:bg-sand text-ink">Today</button>
+          </div>
+          <div class="flex items-center gap-5 text-xs text-mute flex-wrap">
+            <span class="flex items-center gap-2"><span class="w-3 h-3 inline-block" style="background:var(--jade)"></span>Filled</span>
+            <span class="flex items-center gap-2"><span class="w-3 h-3 inline-block" style="background:var(--coral)"></span>Open</span>
+            <span class="flex items-center gap-2"><span class="w-3 h-3 inline-block" style="background:var(--honey)"></span>Pending review</span>
+            <button onclick="showSignup(); document.getElementById('signupType').value='office';" class="ml-2 px-3 py-1.5 bg-ink text-cream text-xs hover:bg-jade flex items-center gap-1.5">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Post shift
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-cal-grid">
+          <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+
+          <!-- Week 1: Apr 26 — May 2 -->
+          <div class="day outside"><span class="day-num">26</span></div>
+          <div class="day outside"><span class="day-num">27</span></div>
+          <div class="day outside"><span class="day-num">28</span></div>
+          <div class="day outside"><span class="day-num">29</span></div>
+          <div class="day outside"><span class="day-num">30</span></div>
+          <div class="day"><span class="day-num">1</span><span class="shift-pill filled">$520 · PK</span></div>
+          <div class="day"><span class="day-num">2</span></div>
+
+          <!-- Week 2: May 3 — 9 (May 4 = today) -->
+          <div class="day"><span class="day-num">3</span></div>
+          <div class="day today"><span class="day-num">4</span><span class="shift-pill filled">$520 · PK</span><span class="shift-pill open">$420 · Open</span></div>
+          <div class="day"><span class="day-num">5</span><span class="shift-pill filled">$520 · SC</span></div>
+          <div class="day"><span class="day-num">6</span><span class="shift-pill open">$380 · Open</span></div>
+          <div class="day"><span class="day-num">7</span><span class="shift-pill pending">3 applicants</span></div>
+          <div class="day"><span class="day-num">8</span><span class="shift-pill filled">$520 · MT</span></div>
+          <div class="day"><span class="day-num">9</span></div>
+
+          <!-- Week 3: May 10 — 16 -->
+          <div class="day"><span class="day-num">10</span></div>
+          <div class="day"><span class="day-num">11</span><span class="shift-pill filled">$520 · JP</span></div>
+          <div class="day"><span class="day-num">12</span><span class="shift-pill filled">$520 · PK</span></div>
+          <div class="day"><span class="day-num">13</span><span class="shift-pill open">$400 · Open</span></div>
+          <div class="day"><span class="day-num">14</span><span class="shift-pill filled">$520 · SC</span></div>
+          <div class="day"><span class="day-num">15</span><span class="shift-pill pending">2 applicants</span></div>
+          <div class="day"><span class="day-num">16</span></div>
+
+          <!-- Week 4: May 17 — 23 -->
+          <div class="day"><span class="day-num">17</span></div>
+          <div class="day"><span class="day-num">18</span><span class="shift-pill open">$420 · Open</span></div>
+          <div class="day"><span class="day-num">19</span><span class="shift-pill filled">$520 · MT</span></div>
+          <div class="day"><span class="day-num">20</span></div>
+          <div class="day"><span class="day-num">21</span><span class="shift-pill pending">5 applicants</span><span class="shift-pill filled">$480 · AR</span></div>
+          <div class="day"><span class="day-num">22</span><span class="shift-pill filled">$520 · JP</span></div>
+          <div class="day"><span class="day-num">23</span></div>
+
+          <!-- Week 5: May 24 — 30 -->
+          <div class="day"><span class="day-num">24</span></div>
+          <div class="day"><span class="day-num">25</span><span class="shift-pill filled">$520 · PK</span></div>
+          <div class="day"><span class="day-num">26</span><span class="shift-pill filled">$520 · SC</span></div>
+          <div class="day"><span class="day-num">27</span><span class="shift-pill open">$400 · Open</span></div>
+          <div class="day"><span class="day-num">28</span><span class="shift-pill filled">$520 · MT</span><span class="shift-pill open">$380 · Open</span></div>
+          <div class="day"><span class="day-num">29</span></div>
+          <div class="day"><span class="day-num">30</span></div>
+
+          <!-- Week 6: May 31 + Jun 1-6 -->
+          <div class="day"><span class="day-num">31</span></div>
+          <div class="day outside"><span class="day-num">1</span></div>
+          <div class="day outside"><span class="day-num">2</span></div>
+          <div class="day outside"><span class="day-num">3</span></div>
+          <div class="day outside"><span class="day-num">4</span></div>
+          <div class="day outside"><span class="day-num">5</span></div>
+          <div class="day outside"><span class="day-num">6</span></div>
+        </div>
+
+        <!-- Footer summary strip -->
+        <div class="border-t border-stone grid grid-cols-2 md:grid-cols-4 text-sm">
+          <div class="p-5 border-r border-stone">
+            <div class="text-xs uppercase tracking-widest text-mute mb-1">Filled this month</div>
+            <div class="font-display text-2xl font-semibold">14 <span class="text-mute text-base font-normal">shifts</span></div>
+          </div>
+          <div class="p-5 border-r border-stone">
+            <div class="text-xs uppercase tracking-widest text-mute mb-1">Open</div>
+            <div class="font-display text-2xl font-semibold text-coral">5 <span class="text-mute text-base font-normal">shifts</span></div>
+          </div>
+          <div class="p-5 border-r border-stone">
+            <div class="text-xs uppercase tracking-widest text-mute mb-1">Pending review</div>
+            <div class="font-display text-2xl font-semibold text-honey">10 <span class="text-mute text-base font-normal">applicants</span></div>
+          </div>
+          <div class="p-5">
+            <div class="text-xs uppercase tracking-widest text-mute mb-1">Total spend</div>
+            <div class="font-display text-2xl font-semibold">$7,280</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming bookings preview -->
+      <div class="grid md:grid-cols-3 gap-px bg-stone border border-stone mt-px reveal">
+        <div class="bg-white p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs px-2 py-1 bg-jade text-cream uppercase tracking-wider font-semibold">Filled</span>
+            <span class="text-xs text-mute">Today</span>
+          </div>
+          <div class="font-display text-lg font-semibold">8:00 AM – 4:00 PM</div>
+          <div class="text-sm text-mute mt-1">Bright Smile Dental · Toronto</div>
+          <div class="flex items-center gap-3 mt-4 pt-4 border-t border-stone">
+            <div class="avatar w-9 h-9 text-sm" style="background:#d4e7e3; color:#0a2624;">PK</div>
+            <div>
+              <div class="text-sm font-medium">Priya Kaur</div>
+              <div class="text-xs text-mute">RDH · 4.9★ · Dentrix</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs px-2 py-1 bg-coral text-cream uppercase tracking-wider font-semibold">Open</span>
+            <span class="text-xs text-mute">Tomorrow</span>
+          </div>
+          <div class="font-display text-lg font-semibold">9:00 AM – 5:00 PM</div>
+          <div class="text-sm text-mute mt-1">Northgate Family Dentistry · Mississauga</div>
+          <div class="flex items-center justify-between mt-4 pt-4 border-t border-stone">
+            <div class="text-sm">
+              <span class="font-semibold">$420</span>
+              <span class="text-mute"> · 4 applicants so far</span>
+            </div>
+            <button class="px-3 py-1.5 bg-ink text-cream text-xs hover:bg-jade">Review</button>
+          </div>
+        </div>
+        <div class="bg-white p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs px-2 py-1 bg-honey text-cream uppercase tracking-wider font-semibold">Pending</span>
+            <span class="text-xs text-mute">May 7</span>
+          </div>
+          <div class="font-display text-lg font-semibold">7:30 AM – 3:30 PM</div>
+          <div class="text-sm text-mute mt-1">Heritage Dental Group · Brampton</div>
+          <div class="flex items-center justify-between mt-4 pt-4 border-t border-stone">
+            <div class="text-sm">
+              <span class="font-semibold">3 candidates</span>
+              <span class="text-mute"> · awaiting your pick</span>
+            </div>
+            <button class="px-3 py-1.5 bg-ink text-cream text-xs hover:bg-jade">Choose</button>
           </div>
         </div>
       </div>
@@ -2925,11 +3357,20 @@ function updateNavAuth() {
       <button onclick="logout(); toggleMobileMenu();" class="w-full px-4 py-3 rounded-full border border-ink">Sign out</button>`;
   } else {
     desktop = `
-      <button onclick="showLogin()" class="px-4 py-2 rounded-full text-sm hover:bg-sand transition">Sign in</button>
-      <button onclick="showSignup()" class="px-4 py-2 rounded-full bg-ink text-cream text-sm hover:bg-jade transition">Get started</button>`;
+      <button onclick="showLogin()" class="px-4 py-2 rounded-full text-sm border border-ink/15 bg-white hover:border-ink hover:bg-ink hover:text-cream transition flex items-center gap-2 btn-press">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Log in
+      </button>
+      <button onclick="showSignup()" class="px-4 py-2 rounded-full bg-ink text-cream text-sm hover:bg-jade transition flex items-center gap-2 btn-press">
+        Sign up
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>`;
     mobile = `
-      <button onclick="showLogin(); toggleMobileMenu();" class="w-full mb-2 px-4 py-3 rounded-full border border-ink">Sign in</button>
-      <button onclick="showSignup(); toggleMobileMenu();" class="w-full px-4 py-3 rounded-full bg-ink text-cream">Get started</button>`;
+      <button onclick="showLogin(); toggleMobileMenu();" class="w-full mb-2 px-4 py-3 rounded-full border border-ink flex items-center justify-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Log in
+      </button>
+      <button onclick="showSignup(); toggleMobileMenu();" class="w-full px-4 py-3 rounded-full bg-ink text-cream">Sign up</button>`;
   }
   if (navAuth) navAuth.innerHTML = desktop;
   if (mobileNavAuth) mobileNavAuth.innerHTML = mobile;
