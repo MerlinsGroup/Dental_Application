@@ -766,29 +766,33 @@
   </div>
 
   <!-- Nav -->
-  <nav class="px-4 md:px-10 py-5 flex items-center justify-between animate-fade-in border-b border-stone">
+  <nav class="px-4 md:px-10 py-2.5 flex items-center justify-between animate-fade-in border-b border-stone bg-cream sticky top-0 z-30">
     <div class="flex items-center">
-      <img src="logo.png" alt="Hygea" class="h-20 md:h-24 w-auto object-contain"/>
+      <img src="logo.png" alt="Hygea" class="h-10 md:h-11 w-auto object-contain"/>
     </div>
 
     <div class="md:hidden flex items-center gap-2">
-      <button onclick="showLogin()" class="px-3 py-1.5 rounded-full text-sm border border-ink/20 hover:bg-ink hover:text-cream transition flex items-center gap-1.5">
+      <button onclick="showLogin()" class="px-3 py-1.5 text-sm border border-ink/20 hover:bg-ink hover:text-cream transition flex items-center gap-1.5">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Log in
       </button>
       <button onclick="toggleMobileMenu()" class="p-2" aria-label="menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
     </div>
 
-    <div class="hidden md:flex items-center gap-8 text-sm">
+    <div class="hidden md:flex items-center gap-7 text-sm">
       <a class="hover:text-jade transition cursor-pointer">For hygienists</a>
       <a class="hover:text-jade transition cursor-pointer">For practices</a>
       <a class="hover:text-jade transition cursor-pointer">How it works</a>
       <a class="hover:text-jade transition cursor-pointer">Pricing</a>
-      <div id="navAuth" class="flex items-center gap-3"></div>
+      <button onclick="showDemo()" class="px-3.5 py-1.5 text-sm border border-ink/15 hover:border-ink hover:bg-ink hover:text-cream transition flex items-center gap-1.5 btn-press">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Book demo
+      </button>
+      <div id="navAuth" class="flex items-center gap-2.5"></div>
     </div>
   </nav>
 
@@ -3350,13 +3354,13 @@ function updateNavAuth() {
       <button onclick="logout(); toggleMobileMenu();" class="w-full px-4 py-3 rounded-full border border-ink">Sign out</button>`;
   } else {
     desktop = `
-      <button onclick="showLogin()" class="px-4 py-2 rounded-full text-sm border border-ink/15 bg-white hover:border-ink hover:bg-ink hover:text-cream transition flex items-center gap-2 btn-press">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      <button onclick="showLogin()" class="px-3.5 py-1.5 text-sm border border-ink/15 bg-white hover:border-ink hover:bg-ink hover:text-cream transition flex items-center gap-1.5 btn-press">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Log in
       </button>
-      <button onclick="showSignup()" class="px-4 py-2 rounded-full bg-ink text-cream text-sm hover:bg-jade transition flex items-center gap-2 btn-press">
+      <button onclick="showSignup()" class="px-3.5 py-1.5 bg-ink text-cream text-sm hover:bg-jade transition flex items-center gap-1.5 btn-press">
         Sign up
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>`;
     mobile = `
       <button onclick="showLogin(); toggleMobileMenu();" class="w-full mb-2 px-4 py-3 rounded-full border border-ink flex items-center justify-center gap-2">
