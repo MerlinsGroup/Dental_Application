@@ -801,38 +801,73 @@
 
   <!-- Stats strip -->
   <section class="border-y border-stone bg-ink text-cream relative overflow-hidden">
-    <div class="absolute inset-0 grid-bg opacity-30"></div>
+    <div class="absolute inset-0 grid-bg opacity-30 parallax-layer" data-parallax="0.25"></div>
     <div class="px-4 md:px-10 py-14 grid grid-cols-2 md:grid-cols-4 gap-8 relative">
-      <div class="animate-fade-in cursor-pointer hover:scale-105 transition" onclick="showStatDetails('hygienists')">
+      <div class="reveal scroll-scale cursor-pointer hover:scale-105 transition" onclick="showStatDetails('hygienists')">
         <div class="font-display text-5xl font-semibold tracking-tight">358</div>
         <div class="text-sm opacity-70 mt-2">Verified hygienists</div>
       </div>
-      <div class="animate-fade-in stagger-1 cursor-pointer hover:scale-105 transition" onclick="showStatDetails('practices')">
+      <div class="reveal scroll-scale cursor-pointer hover:scale-105 transition" onclick="showStatDetails('practices')">
         <div class="font-display text-5xl font-semibold tracking-tight">119</div>
         <div class="text-sm opacity-70 mt-2">Active dental practices</div>
       </div>
-      <div class="animate-fade-in stagger-2 cursor-pointer hover:scale-105 transition" onclick="showStatDetails('gmv')">
+      <div class="reveal scroll-scale cursor-pointer hover:scale-105 transition" onclick="showStatDetails('gmv')">
         <div class="font-display text-5xl font-semibold tracking-tight">$167K</div>
         <div class="text-sm opacity-70 mt-2">April GMV</div>
       </div>
-      <div class="animate-fade-in stagger-3 cursor-pointer hover:scale-105 transition" onclick="showStatDetails('fill-rate')">
+      <div class="reveal scroll-scale cursor-pointer hover:scale-105 transition" onclick="showStatDetails('fill-rate')">
         <div class="font-display text-5xl font-semibold tracking-tight">94%</div>
         <div class="text-sm opacity-70 mt-2">Filled in &lt; 2 hrs</div>
       </div>
     </div>
   </section>
 
+  <!-- Image marquee strip -->
+  <section class="py-6 bg-cream border-b border-stone">
+    <div class="marquee-mask">
+      <div class="marquee-row">
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <!-- duplicate for seamless loop -->
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+        <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=560&q=70&auto=format&fit=crop" alt="" class="h-40 w-64 object-cover rounded-2xl"/>
+      </div>
+    </div>
+  </section>
+
   <!-- How it works -->
-  <section class="px-4 md:px-10 py-20">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
+  <section class="px-4 md:px-10 py-20 relative overflow-hidden">
+    <!-- floating parallax accent image -->
+    <img src="https://images.unsplash.com/photo-1495573020741-8a2f372bbec3?w=600&q=70&auto=format&fit=crop"
+         alt="" aria-hidden="true"
+         class="hidden md:block absolute -left-12 top-32 w-56 h-56 object-cover rounded-3xl opacity-80 parallax-layer rotate-[-6deg] shadow-xl"
+         data-parallax="-0.25"/>
+    <img src="https://images.unsplash.com/photo-1667133295315-820bb6481730?w=600&q=70&auto=format&fit=crop"
+         alt="" aria-hidden="true"
+         class="hidden md:block absolute -right-10 bottom-20 w-48 h-48 object-cover rounded-3xl opacity-80 parallax-layer rotate-[5deg] shadow-xl"
+         data-parallax="0.3"/>
+
+    <div class="max-w-6xl mx-auto relative">
+      <div class="text-center mb-12 reveal">
         <div class="text-xs uppercase tracking-widest text-jade mb-3">How it works</div>
         <h2 class="font-display text-4xl md:text-5xl font-semibold mb-4">From posted to filled in minutes</h2>
         <p class="text-lg text-ink/70">Three roles. One marketplace. Built for trust.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-3xl p-8 border border-stone card-hover">
+        <div class="bg-white rounded-3xl p-8 border border-stone card-hover reveal reveal-left">
           <div class="w-12 h-12 rounded-full bg-sage/15 mb-4 flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3d6028" stroke-width="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -850,7 +885,7 @@
           </button>
         </div>
 
-        <div class="bg-white rounded-3xl p-8 border border-stone card-hover">
+        <div class="bg-white rounded-3xl p-8 border border-stone card-hover reveal">
           <div class="w-12 h-12 rounded-full bg-rust/15 mb-4 flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8453a" stroke-width="2">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
@@ -868,7 +903,7 @@
           </button>
         </div>
 
-        <div class="bg-gradient-to-br from-jade to-ink text-cream rounded-3xl p-8 relative overflow-hidden">
+        <div class="bg-gradient-to-br from-jade to-ink text-cream rounded-3xl p-8 relative overflow-hidden reveal reveal-right">
           <div class="absolute top-0 right-0 w-32 h-32 bg-coral/20 rounded-full blur-3xl"></div>
           <div class="w-12 h-12 rounded-full bg-white/10 mb-4 flex items-center justify-center relative">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -900,16 +935,59 @@
     </div>
   </section>
 
+  <!-- Inside the network gallery -->
+  <section class="px-4 md:px-10 py-20 bg-cream relative overflow-hidden">
+    <div class="max-w-6xl mx-auto relative">
+      <div class="text-center mb-12 reveal">
+        <div class="text-xs uppercase tracking-widest text-jade mb-3">Inside the network</div>
+        <h2 class="font-display text-4xl md:text-5xl font-semibold mb-4">Modern clinics. Trusted hands.</h2>
+        <p class="text-lg text-ink/70 max-w-2xl mx-auto">A look at the practices and professionals on Hygea today.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="parallax-tile reveal reveal-zoom h-72 col-span-2 row-span-2">
+          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=900&q=70&auto=format&fit=crop" alt="Modern dental clinic" class="w-full h-full object-cover"/>
+          <div class="tile-caption">
+            <div class="font-display text-lg font-semibold">119 active practices</div>
+            <div class="opacity-80">Across the GTA</div>
+          </div>
+        </div>
+        <div class="parallax-tile reveal h-72">
+          <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=70&auto=format&fit=crop" alt="Hygienist at work" class="w-full h-full object-cover"/>
+          <div class="tile-caption"><div class="font-display font-semibold">Verified RDHs</div></div>
+        </div>
+        <div class="parallax-tile reveal h-72">
+          <img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=600&q=70&auto=format&fit=crop" alt="Smile" class="w-full h-full object-cover"/>
+          <div class="tile-caption"><div class="font-display font-semibold">4.8★ avg rating</div></div>
+        </div>
+        <div class="parallax-tile reveal h-72">
+          <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=70&auto=format&fit=crop" alt="Dentist tools" class="w-full h-full object-cover"/>
+          <div class="tile-caption"><div class="font-display font-semibold">Same-day shifts</div></div>
+        </div>
+        <div class="parallax-tile reveal h-72">
+          <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=600&q=70&auto=format&fit=crop" alt="Dental checkup" class="w-full h-full object-cover"/>
+          <div class="tile-caption"><div class="font-display font-semibold">$2M insurance</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Testimonials -->
-  <section class="px-4 md:px-10 py-20 bg-sand">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
+  <section class="px-4 md:px-10 py-20 bg-sand relative overflow-hidden">
+    <!-- parallax decorative dental image -->
+    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=70&auto=format&fit=crop"
+         alt="" aria-hidden="true"
+         class="hidden md:block absolute right-0 top-10 w-64 h-64 object-cover rounded-full opacity-25 blur-sm parallax-layer"
+         data-parallax="-0.4"/>
+
+    <div class="max-w-6xl mx-auto relative">
+      <div class="text-center mb-12 reveal">
         <div class="text-xs uppercase tracking-widest text-jade mb-3">Real stories</div>
         <h2 class="font-display text-4xl md:text-5xl font-semibold mb-4">From hygienists & practices thriving</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 border border-stone card-hover">
+        <div class="bg-white rounded-2xl p-6 border border-stone card-hover reveal reveal-left">
           <div class="star-rating mb-3">
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -927,7 +1005,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-stone card-hover">
+        <div class="bg-white rounded-2xl p-6 border border-stone card-hover reveal">
           <div class="star-rating mb-3">
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -945,7 +1023,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-stone card-hover">
+        <div class="bg-white rounded-2xl p-6 border border-stone card-hover reveal reveal-right">
           <div class="star-rating mb-3">
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             <svg viewBox="0 0 24 24" fill="#e8746a"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -968,10 +1046,15 @@
 
   <!-- CTA -->
   <section class="px-4 md:px-10 py-20 bg-gradient-to-br from-jade to-ink relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-full grid-bg opacity-20"></div>
+    <div class="absolute top-0 left-0 w-full h-full grid-bg opacity-20 parallax-layer" data-parallax="0.3"></div>
+    <!-- parallax background dental image -->
+    <img src="https://images.unsplash.com/photo-1564420228450-d9a5bc8d6565?w=1600&q=70&auto=format&fit=crop"
+         alt="" aria-hidden="true"
+         class="absolute inset-0 w-full h-full object-cover opacity-15 parallax-layer mix-blend-luminosity"
+         data-parallax="0.18"/>
     <div class="max-w-4xl mx-auto text-center relative">
-      <h2 class="font-display text-4xl md:text-5xl font-semibold text-cream mb-6">Ready to join the future of dental staffing?</h2>
-      <p class="text-lg text-cream/80 mb-8">Get started in minutes. No contracts, no commitments.</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold text-cream mb-6 reveal scroll-scale">Ready to join the future of dental staffing?</h2>
+      <p class="text-lg text-cream/80 mb-8 reveal">Get started in minutes. No contracts, no commitments.</p>
       <div class="flex flex-wrap items-center justify-center gap-4">
         <button onclick="showSignup()" class="px-8 py-4 bg-cream text-ink rounded-full font-medium hover:bg-white transition btn-press">
           Get started now
@@ -2771,7 +2854,15 @@ function hideAllViews() {
 
 function showLogin() { hideAllViews(); document.getElementById('login-view').classList.remove('hidden'); window.scrollTo(0,0); }
 function showSignup() { hideAllViews(); document.getElementById('signup-view').classList.remove('hidden'); window.scrollTo(0,0); }
-function showLanding() { hideAllViews(); document.getElementById('landing-view').classList.remove('hidden'); updateNavAuth(); window.scrollTo(0,0); }
+function showLanding() {
+  hideAllViews();
+  document.getElementById('landing-view').classList.remove('hidden');
+  updateNavAuth();
+  window.scrollTo(0,0);
+  if (typeof window.initLandingParallax === 'function') {
+    requestAnimationFrame(() => window.initLandingParallax());
+  }
+}
 function goToLanding() { showLanding(); }
 
 function quickLogin(type) {
@@ -4428,6 +4519,93 @@ document.addEventListener('keydown', (e) => {
     sendMessage();
   }
 });
+
+/* ============================================================
+   PARALLAX + SCROLL REVEALS (landing page)
+   ============================================================ */
+(function () {
+  let revealObserver = null;
+  let parallaxRAF = null;
+  let scaleNodes = [];
+  let parallaxNodes = [];
+
+  function setupReveals() {
+    if (revealObserver) revealObserver.disconnect();
+    const els = document.querySelectorAll('#landing-view .reveal');
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else if (entry.boundingClientRect.top > 0) {
+          // re-arm only when leaving below the viewport, so things "appear and disappear" on rescroll
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => revealObserver.observe(el));
+  }
+
+  function updateParallax() {
+    parallaxRAF = null;
+    const vh = window.innerHeight;
+
+    // Translate-based parallax layers
+    for (let i = 0; i < parallaxNodes.length; i++) {
+      const el = parallaxNodes[i];
+      const rect = el.getBoundingClientRect();
+      // distance of element center from viewport center
+      const center = rect.top + rect.height / 2;
+      const delta = center - vh / 2;
+      const speed = parseFloat(el.dataset.parallax) || 0.2;
+      el.style.setProperty('--parallax-y', (-delta * speed).toFixed(1) + 'px');
+    }
+
+    // Scroll-driven scale: items get bigger as they enter the viewport
+    for (let i = 0; i < scaleNodes.length; i++) {
+      const el = scaleNodes[i];
+      const rect = el.getBoundingClientRect();
+      // 0 when still below the fold, 1 when fully into the upper-middle band
+      const enter = vh * 0.95;
+      const settle = vh * 0.45;
+      let p = (enter - rect.top) / (enter - settle);
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      el.style.setProperty('--scroll-progress', p.toFixed(3));
+    }
+  }
+
+  function onScroll() {
+    if (parallaxRAF == null) parallaxRAF = requestAnimationFrame(updateParallax);
+  }
+
+  function refreshNodes() {
+    parallaxNodes = Array.from(document.querySelectorAll('#landing-view .parallax-layer'));
+    scaleNodes    = Array.from(document.querySelectorAll('#landing-view .scroll-scale'));
+  }
+
+  let bound = false;
+  function bindOnce() {
+    if (bound) return;
+    bound = true;
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  window.initLandingParallax = function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    refreshNodes();
+    setupReveals();
+    bindOnce();
+    updateParallax();
+  };
+
+  // Run when DOM is ready (landing-view may already be visible by then).
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.initLandingParallax());
+  } else {
+    window.initLandingParallax();
+  }
+})();
 </script>
 
 </body>
