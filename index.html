@@ -377,6 +377,113 @@
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 1rem;
   }
+
+  /* ===== Parallax & scroll-driven reveals ===== */
+
+  /* Hero video background */
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-video-wrap video,
+  .hero-video-wrap .hero-video-poster {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+  .hero-video-wrap::after {
+    /* readable overlay */
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(250,247,242,0.75) 0%, rgba(250,247,242,0.55) 35%, rgba(250,247,242,0.85) 100%),
+      linear-gradient(90deg, rgba(250,247,242,0.7) 0%, rgba(250,247,242,0.2) 60%, rgba(250,247,242,0.0) 100%);
+    pointer-events: none;
+  }
+
+  /* True parallax: layer translates at fraction of scroll. JS sets --parallax-y. */
+  .parallax-layer {
+    transform: translate3d(0, var(--parallax-y, 0px), 0);
+    will-change: transform;
+  }
+
+  /* Reveal-on-scroll base: invisible until in view */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  /* Variants */
+  .reveal-left  { transform: translateX(-60px); }
+  .reveal-left.in-view  { transform: translateX(0); }
+  .reveal-right { transform: translateX(60px); }
+  .reveal-right.in-view { transform: translateX(0); }
+  .reveal-zoom  { transform: scale(0.7); opacity: 0; }
+  .reveal-zoom.in-view  { transform: scale(1); opacity: 1; }
+
+  /* Scale-with-scroll: JS sets --scroll-progress (0 → 1) when crossing viewport */
+  .scroll-scale {
+    --scroll-progress: 0;
+    transform: scale(calc(0.6 + 0.4 * var(--scroll-progress)));
+    opacity: var(--scroll-progress);
+    transition: transform 0.05s linear, opacity 0.2s linear;
+    will-change: transform, opacity;
+  }
+
+  /* Parallax image cards in gallery */
+  .parallax-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .parallax-tile img {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .parallax-tile:hover img { transform: scale(1.08); }
+  .parallax-tile .tile-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, transparent, rgba(10,38,36,0.85));
+    color: var(--cream);
+    font-size: 13px;
+  }
+
+  /* Gallery marquee row */
+  @keyframes marqueeX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .marquee-row {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: marqueeX 50s linear infinite;
+  }
+  .marquee-mask {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-layer { transform: none !important; }
+    .reveal, .reveal-left, .reveal-right, .reveal-zoom { opacity: 1 !important; transform: none !important; }
+    .scroll-scale { opacity: 1 !important; transform: none !important; }
+    .marquee-row { animation: none; }
+    .hero-video-wrap video { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -580,9 +687,19 @@
   </div>
 
   <!-- Hero -->
-  <section class="px-4 md:px-10 pt-12 md:pt-16 pb-20 md:pb-24 grid grid-cols-1 md:grid-cols-12 gap-8 items-end relative">
-    <!-- Decorative blob -->
-    <div class="absolute top-20 right-20 w-72 h-72 rounded-full bg-jade/5 blur-3xl pointer-events-none"></div>
+  <section class="px-4 md:px-10 pt-12 md:pt-16 pb-20 md:pb-24 grid grid-cols-1 md:grid-cols-12 gap-8 items-end relative overflow-hidden">
+    <!-- Background video -->
+    <div class="hero-video-wrap" aria-hidden="true">
+      <img class="hero-video-poster" src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1920&q=70&auto=format&fit=crop" alt="">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1920&q=70&auto=format&fit=crop">
+        <source src="https://videos.pexels.com/video-files/7803284/7803284-hd_1920_1078_30fps.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Decorative parallax blob -->
+    <div class="absolute top-20 right-20 w-72 h-72 rounded-full bg-jade/5 blur-3xl pointer-events-none parallax-layer" data-parallax="0.35"></div>
+    <div class="absolute -bottom-10 -left-10 w-80 h-80 rounded-full bg-coral/10 blur-3xl pointer-events-none parallax-layer" data-parallax="0.18"></div>
 
     <div class="md:col-span-7 animate-slide-in relative">
       <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 bg-jade/10 rounded-full text-xs">
@@ -635,7 +752,7 @@
     </div>
 
     <!-- Hero card -->
-    <div class="md:col-span-5 relative animate-scale-in stagger-1 mt-8 md:mt-0">
+    <div class="md:col-span-5 relative animate-scale-in stagger-1 mt-8 md:mt-0 parallax-layer" data-parallax="-0.08">
       <div class="bg-white rounded-3xl p-6 shadow-[0_30px_80px_-20px_rgba(10,38,36,0.25)] border border-stone">
         <div class="flex items-center justify-between mb-5">
           <span class="chip chip-coral">
