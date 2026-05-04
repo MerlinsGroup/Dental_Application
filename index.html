@@ -193,9 +193,10 @@
 
   /* Sidebar mobile */
   .mobile-sidebar {
-    position: fixed; top: 0; left: -100%;
+    position: fixed !important;
+    top: 0; left: -100%;
     width: 84%; max-width: 320px; height: 100vh;
-    z-index: 9999;
+    z-index: 9999 !important;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 4px 0 30px rgba(10, 38, 36, 0.15);
   }
@@ -203,12 +204,36 @@
   .sidebar-overlay {
     position: fixed; inset: 0;
     background: rgba(10, 38, 36, 0.5);
-    z-index: 9998;
+    z-index: 9998 !important;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
   }
   .sidebar-overlay.open { opacity: 1; pointer-events: all; }
+  /* Restore desktop layout — undo the !important fixes above */
+  @media (min-width: 768px) {
+    .mobile-sidebar {
+      position: relative !important;
+      left: 0 !important;
+      width: 16rem;
+      height: auto;
+      z-index: auto !important;
+      box-shadow: none;
+      transition: none;
+    }
+  }
+  /* Sidebar close (X) — only visible on mobile */
+  .sidebar-close {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--stone);
+    width: 32px; height: 32px;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  @media (max-width: 767px) {
+    .sidebar-close { display: inline-flex; }
+  }
 
   /* Page transition */
   .page-transition {
@@ -1555,9 +1580,14 @@
   <div id="hygienist-sidebar-overlay" class="sidebar-overlay md:hidden" onclick="toggleSidebar('hygienist')"></div>
 
   <!-- Sidebar -->
-  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col fixed md:relative h-full mobile-sidebar md:left-0 md:transition-none z-40" id="hygienist-sidebar">
-    <div class="px-6 flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
-      <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
+  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col mobile-sidebar" id="hygienist-sidebar">
+    <div class="px-6 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
+        <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
+      </div>
+      <button class="sidebar-close" aria-label="Close menu" onclick="toggleSidebar('hygienist')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
 
     <div class="mt-8 flex-1 overflow-y-auto">
@@ -2266,9 +2296,14 @@
 
   <div id="office-sidebar-overlay" class="sidebar-overlay md:hidden" onclick="toggleSidebar('office')"></div>
 
-  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col fixed md:relative h-full mobile-sidebar md:left-0 md:transition-none z-40" id="office-sidebar">
-    <div class="px-6 flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
-      <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
+  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col mobile-sidebar" id="office-sidebar">
+    <div class="px-6 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
+        <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
+      </div>
+      <button class="sidebar-close" aria-label="Close menu" onclick="toggleSidebar('office')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
 
     <div class="mt-8 flex-1 overflow-y-auto">
@@ -2741,10 +2776,16 @@
 
   <div id="admin-sidebar-overlay" class="sidebar-overlay md:hidden" onclick="toggleSidebar('admin')"></div>
 
-  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col fixed md:relative h-full mobile-sidebar md:left-0 md:transition-none z-40" id="admin-sidebar">
-    <div class="px-6 flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
-      <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
-      <span class="ml-2 text-[9px] uppercase tracking-widest text-mute font-mono px-1.5 py-0.5 bg-sand rounded">admin</span>
+  <aside class="w-64 bg-white border-r border-stone py-6 flex flex-col mobile-sidebar" id="admin-sidebar">
+    <div class="px-6 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 cursor-pointer" onclick="goToLanding()">
+        <img src="logo.png" alt="Hygea" class="h-10 w-auto object-contain"/>
+        <span class="ml-2 text-[9px] uppercase tracking-widest text-mute font-mono px-1.5 py-0.5 bg-sand rounded">admin</span>
+      </div>
+      <button class="sidebar-close" aria-label="Close menu" onclick="toggleSidebar('admin')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
     </div>
 
     <div class="mt-8 flex-1 overflow-y-auto">
