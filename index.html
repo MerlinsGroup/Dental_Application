@@ -491,6 +491,14 @@
     .hero-video-wrap video { display: none; }
   }
 
+  /* Reliable nav show/hide — independent of Tailwind JIT */
+  .nav-desktop { display: none; }
+  .nav-mobile  { display: flex; }
+  @media (min-width: 900px) {
+    .nav-desktop { display: flex; }
+    .nav-mobile  { display: none !important; }
+  }
+
   /* ===== Landing page: sharp edges + cohesive imagery ===== */
   /* Strip all border-radius across the landing view */
   #landing-view *,
@@ -766,12 +774,12 @@
   </div>
 
   <!-- Nav -->
-  <nav class="px-4 md:px-10 py-2.5 flex items-center justify-between animate-fade-in border-b border-stone bg-cream sticky top-0 z-30">
+  <nav class="px-4 md:px-8 py-1.5 flex items-center justify-between animate-fade-in border-b border-stone bg-cream sticky top-0 z-30">
     <div class="flex items-center">
-      <img src="logo.png" alt="Hygea" class="h-10 md:h-11 w-auto object-contain"/>
+      <img src="logo.png" alt="Hygea" class="h-14 md:h-16 w-auto object-contain"/>
     </div>
 
-    <div class="md:hidden flex items-center gap-2">
+    <div class="nav-mobile flex items-center gap-2">
       <button onclick="showLogin()" class="px-3 py-1.5 text-sm border border-ink/20 hover:bg-ink hover:text-cream transition flex items-center gap-1.5">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Log in
@@ -783,7 +791,7 @@
       </button>
     </div>
 
-    <div class="hidden md:flex items-center gap-7 text-sm">
+    <div class="nav-desktop items-center gap-5 text-sm">
       <a class="hover:text-jade transition cursor-pointer">For hygienists</a>
       <a class="hover:text-jade transition cursor-pointer">For practices</a>
       <a class="hover:text-jade transition cursor-pointer">How it works</a>
